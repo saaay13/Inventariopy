@@ -93,12 +93,6 @@ erDiagram
 
 El campo `producto_nombre` en la tabla `VENTAS` es una **copia manual** del nombre del producto al momento de la venta. Si el nombre del producto se modifica en la tabla `PRODUCTOS`, las ventas históricas quedarán con información incorrecta e inconsistente.
 
-```sql
--- Escenario problemático:
-UPDATE productos SET nombre = 'Arroz Premium 1kg' WHERE id = 1;
--- Las ventas previas aún dicen 'Arroz Superior 1kg'
--- La consulta SELECT * FROM ventas ya no es confiable
-```
 
 #### 🔴 Problema 2 — Sin Foreign Key formal
 
@@ -354,18 +348,18 @@ ORDER BY margen_bruto DESC;
 
 | Dimensión de análisis | CRUD Actual | DSS Necesario |
 |----------------------|-------------|---------------|
-| **Propósito** | Registrar transacciones | Transformar datos en decisiones |
-| **Usuario objetivo** | Empleado operativo | Gerente / decisor estratégico |
-| **Modelo de datos** | 2 tablas planas, sin FK formal | Modelo estrella: Ventas + Productos + Clientes + Tiempo + Proveedor |
-| **Consultas** | `SELECT * FROM tabla` | JOINs analíticos, vistas, subconsultas |
-| **Indicadores** | Ninguno calculado automáticamente | KPIs en tiempo real: días de stock, margen, rotación |
-| **Proyección** | Solo datos históricos brutos | Pronóstico de demanda, alertas predictivas |
-| **Alertas** | Solo color rojo si stock < 5 | Notificaciones automáticas por email/SMS |
-| **Interfaz** | Tablas interminables, sin filtros | Dashboard con gráficos, filtros, drill-down |
-| **Exportación** | Ninguna | PDF, Excel, Google Sheets |
-| **Escalabilidad** | Un usuario, archivo SQLite local | Multi-usuario, PostgreSQL, APIs REST |
-| **Auditoría** | Sin log de cambios | Registro completo de quién cambió qué y cuándo |
-| **Inteligencia artificial** | Ninguna | Posibilidad de modelos predictivos de demanda |
+| **Propósito**        | Registrar transacciones                | Transformar datos en decisiones |
+| **Usuario objetivo** | Empleado operativo                     | Gerente / decisor estratégico |
+| **Modelo de datos**  | 2 tablas planas, sin FK formal         | Modelo estrella: Ventas + Productos + Clientes + Tiempo+Proveedor |
+| **Consultas**        | `SELECT * FROM tabla` | JOINs analíticos, vistas, subconsultas |
+| **Indicadores**      | Ninguno calculado automáticamente      | KPIs en tiempo real: días de stock, margen, rotación |
+| **Proyección**       | Solo datos históricos brutos           | Pronóstico de demanda, alertas predictivas |
+| **Alertas**          | Solo color rojo si stock < 5           | Notificaciones automáticas por email/SMS |
+| **Interfaz**         | Tablas interminables, sin filtros      | Dashboard con gráficos, filtros, drill-down |
+| **Exportación**      | Ninguna                                | PDF, Excel, Google Sheets    |
+| **Escalabilidad**    | Un usuario, archivo SQLite local       | Multi-usuario, PostgreSQL, APIs REST |
+| **Auditoría**        | Sin log de cambios                     | Registro completo de quién cambió qué y cuándo |
+| **Inteligencia artificial** | Ninguna                         | Posibilidad de modelos predictivos de demanda |
 
 ---
 
@@ -493,13 +487,13 @@ def verificar_stock_critico():
 
 #### Módulo 3 — Reportes analíticos predefinidos
 
-| Reporte | Frecuencia sugerida | Decisión que soporta |
+| Reporte                                   | Frecuencia sugerida | Decisión que soporta |
 |---------|--------------------|-----------------------|
-| Stock crítico (< 7 días) | Diario, automático | Órdenes de compra |
-| Ventas por categoría (vs. mes anterior) | Semanal | Estrategia comercial |
-| Productos sin movimiento (> 30 días) | Mensual | Liquidación / promociones |
-| Clientes inactivos (> 30 días) | Semanal | Retención, ofertas |
-| Margen bruto por producto | Mensual | Negociación con proveedores |
+| Stock crítico (< 7 días)                  | Diario, automático | Órdenes de compra |
+| Ventas por categoría (vs. mes anterior)   | Semanal               | Estrategia comercial |
+| Productos sin movimiento (> 30 días)      | Mensual               | Liquidación / promociones |
+| Clientes inactivos (> 30 días)            | Semanal               | Retención, ofertas |
+| Margen bruto por producto                 | Mensual               | Negociación con proveedores |
 
 #### Módulo 4 — Diagrama de clases UML (capa de negocio)
 
@@ -633,15 +627,7 @@ La evolución del sistema CRUD al DSS no es solo una mejora técnica: es un **ac
 - [ ] Se evidencia la participación de los 4 miembros mediante el **historial de commits o firmas** *(pendiente: cada miembro debe hacer al menos 1 commit)*
 - [x] El análisis incluye una reflexión sobre el **impacto en la productividad (ODS 8)** (sección 8)
 
-### Autoevaluación por rúbrica
 
-| Criterio | Nivel alcanzado | Justificación |
-|----------|-----------------|---------------|
-| Análisis de TGS (40%) | Estratégico (81–100) | Se identifican entropía, falta de sinergia y ausencia de feedback con evidencia de código y SQL concreto. Se propone neguentropía mediante normalización y módulos DSS. |
-| Visión DSS (40%) | Estratégico (81–100) | Se diferencia CRUD de DSS, se proponen 5 KPIs, se diseña arquitectura de datos y se incluyen consultas SQL reales para cada decisión crítica. |
-| Herramientas y Ética ODS (20%) | Estratégico (81–100) | Documentación en Markdown/GitHub con diagramas Mermaid. Análisis cuantificado del impacto en el trabajador con conexión a metas específicas del ODS 8. |
-
----
 
 ## Referencias
 
