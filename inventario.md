@@ -11,10 +11,11 @@
 
 | Nombre | Rol en la auditoría | Sección principal |
 |--------|---------------------|-------------------|
-| [Integrante 1] | Arquitecto de datos | Diagrama BD + Fallas TGS |
-| [Integrante 2] | Analista de negocio | Decisiones críticas |
-| [Integrante 3] | Arquitecto DSS | Propuesta de evolución |
-| [Integrante 4] | Analista ético | Conclusión ODS 8 |
+| [Kehila Molina] | Arquitecto de datos | Diagrama BD + Fallas TGS |
+| [Josue Mamanu] | Analista de negocio | Decisiones críticas |
+| [Josue Arroyo] | Arquitecto DSS | Propuesta de evolución |
+| [Sebastian Mollo] | Analista ético | Conclusión ODS 8 |
+| [Sarah Chavez] | Líder de calidad | Integración y revisión final |
 
 ---
 
