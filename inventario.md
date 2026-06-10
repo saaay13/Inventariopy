@@ -9,13 +9,13 @@
 
 ## 👥 Integrantes del Squad
 
-| Nombre | Rol en la auditoría | Sección principal |
-|--------|---------------------|-------------------|
-| [Kehila Molina] | Arquitecto de datos | Diagrama BD + Fallas TGS |
-| [Josue Mamanu] | Analista de negocio | Decisiones críticas |
-| [Josue Arroyo] | Arquitecto DSS | Propuesta de evolución |
-| [Sebastian Mollo] | Analista ético | Conclusión ODS 8 |
-| [Sarah Chavez] | Líder de calidad | Integración y revisión final |
+| Nombre |
+|--------|
+| Kehila Molina |
+| Josue Mamani |
+| Josue Arroyo |
+| Sebastian Mollo |
+| Sarah Chavez |
 
 ---
 
