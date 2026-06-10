@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ '✏ Editar Producto ID: ' ~ producto.id if producto else '+ Nuevo Producto' }}</h2>
+
+<div class="form-panel">
+  <form method="POST">
+    <div class="form-row">
+      <label for="codigo">Código (único):</label>
+      <input id="codigo" name="codigo" type="text"
+             value="{{ producto.codigo if producto else '' }}" required>
+    </div>
+    <div class="form-row">
+      <label for="nombre">Nombre del producto:</label>
+      <input id="nombre" name="nombre" type="text"
+             value="{{ producto.nombre if producto else '' }}" required>
+    </div>
+    <div class="form-row">
+      <label for="categoria">Categoría:</label>
+      <input id="categoria" name="categoria" type="text"
+             value="{{ producto.categoria if producto else '' }}">
+    </div>
+    <div class="form-row">
+      <label for="precio">Precio unitario (Bs.):</label>
+      <input id="precio" name="precio" type="number" step="0.01" min="0"
+             value="{{ producto.precio if producto else '' }}" required>
+    </div>
+    <div class="form-row">
+      <label for="stock">Stock:</label>
+      <input id="stock" name="stock" type="number" min="0"
+             value="{{ producto.stock if producto else 0 }}" required>
+    </div>
+    <div class="form-row">
+      <label for="proveedor">Proveedor:</label>
+      <input id="proveedor" name="proveedor" type="text"
+             value="{{ producto.proveedor if producto else '' }}">
+    </div>
+    <div style="margin-top:10px; display:flex; gap:8px;">
+      <button type="submit" class="btn btn-primary">💾 Guardar</button>
+      <a href="{{ url_for('listar_productos') }}" class="btn">✖ Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

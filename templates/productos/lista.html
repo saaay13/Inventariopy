@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+  <h2>📦 LISTADO COMPLETO DE PRODUCTOS ({{ productos|length }} registros)</h2>
+  <a href="{{ url_for('nuevo_producto') }}" class="btn btn-primary">+ Nuevo Producto</a>
+</div>
+
+<div class="panel">
+  <div class="panel-header">Tabla: PRODUCTOS — Todos los campos — Sin filtros</div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>CÓDIGO</th>
+        <th>NOMBRE COMPLETO DEL PRODUCTO</th>
+        <th>CATEGORÍA</th>
+        <th>PRECIO UNITARIO (Bs.)</th>
+        <th>STOCK ACTUAL (uds.)</th>
+        <th>PROVEEDOR</th>
+        <th>ACCIÓN 1</th>
+        <th>ACCIÓN 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in productos %}
+      <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.codigo }}</td>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.categoria }}</td>
+        <td>{{ "%.2f"|format(p.precio) }}</td>
+        <td style="color:{{ 'red' if p.stock < 5 else 'black' }}; font-weight:{{ 'bold' if p.stock < 5 else 'normal' }};">
+          {{ p.stock }}
+        </td>
+        <td>{{ p.proveedor }}</td>
+        <td>
+          <a href="{{ url_for('editar_producto', pid=p.id) }}" class="btn btn-warning">✏ Editar</a>
+        </td>
+        <td>
+          <form method="POST" action="{{ url_for('eliminar_producto', pid=p.id) }}"
+                onsubmit="return confirm('¿Eliminar producto ID {{ p.id }}?')">
+            <button type="submit" class="btn btn-danger">✖ Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="9" style="text-align:center; padding:10px;">
+        No hay productos registrados.
+      </td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div style="margin-top:6px; font-size:11px; color:#444;">
+  Total registros mostrados: {{ productos|length }} &nbsp;|&nbsp;
+  Precio más alto visible: {{ "%.2f"|format(productos|map(attribute='precio')|max) if productos else '0.00' }} Bs. &nbsp;|&nbsp;
+  Precio más bajo visible: {{ "%.2f"|format(productos|map(attribute='precio')|min) if productos else '0.00' }} Bs.
+</div>
+{% endblock %}

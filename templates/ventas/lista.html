@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+  <h2>🧾 LISTADO COMPLETO DE VENTAS ({{ ventas|length }} registros)</h2>
+  <a href="{{ url_for('nueva_venta') }}" class="btn btn-primary">+ Nueva Venta</a>
+</div>
+
+<div class="panel">
+  <div class="panel-header">Tabla: VENTAS — Todos los campos — Sin agrupaciones</div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID VENTA</th>
+        <th>ID PRODUCTO</th>
+        <th>NOMBRE PRODUCTO</th>
+        <th>CANTIDAD VENDIDA</th>
+        <th>PRECIO UNIT. (Bs.)</th>
+        <th>TOTAL (Bs.)</th>
+        <th>FECHA</th>
+        <th>VENDEDOR</th>
+        <th>ACCIÓN 1</th>
+        <th>ACCIÓN 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for v in ventas %}
+      <tr>
+        <td>{{ v.id }}</td>
+        <td>{{ v.producto_id }}</td>
+        <td>{{ v.producto_nombre }}</td>
+        <td>{{ v.cantidad }}</td>
+        <td>{{ "%.2f"|format(v.precio_unitario) }}</td>
+        <td>{{ "%.2f"|format(v.total) }}</td>
+        <td>{{ v.fecha }}</td>
+        <td>{{ v.vendedor }}</td>
+        <td>
+          <a href="{{ url_for('editar_venta', vid=v.id) }}" class="btn btn-warning">✏ Editar</a>
+        </td>
+        <td>
+          <form method="POST" action="{{ url_for('eliminar_venta', vid=v.id) }}"
+                onsubmit="return confirm('¿Eliminar venta ID {{ v.id }}?')">
+            <button type="submit" class="btn btn-danger">✖ Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="10" style="text-align:center; padding:10px;">
+        No hay ventas registradas.
+      </td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div style="margin-top:6px; font-size:11px; color:#444;">
+  Total registros mostrados: {{ ventas|length }} &nbsp;|&nbsp;
+  Total recaudado (suma bruta): Bs.
+  {{ "%.2f"|format(ventas|map(attribute='total')|sum) if ventas else '0.00' }}
+</div>
+{% endblock %}

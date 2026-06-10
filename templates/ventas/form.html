@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ '✏ Editar Venta ID: ' ~ venta.id if venta else '+ Registrar Nueva Venta' }}</h2>
+
+<div class="form-panel">
+  <form method="POST">
+    <div class="form-row">
+      <label for="producto_id">Producto:</label>
+      <select id="producto_id" name="producto_id" required>
+        <option value="">-- Seleccione --</option>
+        {% for p in productos %}
+        <option value="{{ p.id }}"
+          {{ 'selected' if venta and venta.producto_id == p.id }}>
+          [{{ p.codigo }}] {{ p.nombre }} — Stock: {{ p.stock }} — Bs. {{ "%.2f"|format(p.precio) }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="cantidad">Cantidad:</label>
+      <input id="cantidad" name="cantidad" type="number" min="1"
+             value="{{ venta.cantidad if venta else 1 }}" required>
+    </div>
+    <div class="form-row">
+      <label for="vendedor">Vendedor:</label>
+      <input id="vendedor" name="vendedor" type="text"
+             value="{{ venta.vendedor if venta else '' }}">
+    </div>
+    <div style="margin-top:10px; display:flex; gap:8px;">
+      <button type="submit" class="btn btn-primary">💾 Guardar</button>
+      <a href="{{ url_for('listar_ventas') }}" class="btn">✖ Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
